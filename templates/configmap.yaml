@@ -1,0 +1,27 @@
+{{- if .Values.customization }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "betydb.fullname" . }}-application
+  labels:
+    {{ include "betydb.labels" . | nindent 4 }}
+data:
+  {{- if .Values.customization.application }}
+  application.yml: |
+    {{- .Values.customization.application | nindent 4}}
+  {{- end }}
+---
+{{- if .Values.customization }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "betydb.fullname" . }}-logos
+  labels:
+    {{ include "betydb.labels" . | nindent 4 }}
+binaryData:
+  {{- range $key, $val := .Values.customization.logos }}
+  {{ $key }}: |
+    {{- $val | nindent 4 }}
+  {{- end }}
+{{- end }}
+{{- end }}
