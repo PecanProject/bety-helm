@@ -20,7 +20,7 @@ helm install my-release ncsa/betydb
 ```
 > **Tip**: List all releases using `helm list`
 
-The command deploys Betydb on the Kubernetes cluster in the default configuration.
+The command deploys Betydb on the Kubernetes cluster in the default namespace and configuration.
 
 If the password is generated you will need to save this secret before you upgrade. You can do this using the following commands. **If you do not do this, you will not be able to retrieve the previous secrets**.
 
@@ -29,6 +29,15 @@ echo BETY_PASSWORD=$(kubectl get secrets betydb -o json | jq -r '.data.betyPassw
 echo BETY_SECRETKEY=$(kubectl get secrets betydb -o json | jq -r '.data.secretKey' | base64 -d)
 echo POSTGRESQL_PASSWORD=$(kubectl get secrets betydb-postgresql -o json | jq -r '.data."postgresql-password"' | base64 -d)
 ```
+> **Tip**: List all secrets in the default namespace
+
+**If you wanted to have it into particular namespace, you can try below sample one**
+
+```
+echo BETY_PASSWORD=$(kubectl get secrets betydb -n your_namespace -o json | jq -r '.data.betyPassword' | base64 -d)
+```
+
+> **Tip**: Make sure you have created your own namespace before listing out the secrets ```kubectl create namespace your_namespace```.
 
 ## Upgrading BETY
 
