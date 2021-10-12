@@ -58,5 +58,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./betydb-${{ steps.release_info.outputs.version }}.tgz
-          asset_name: clowder-${{ steps.release_info.outputs.version }}.tgz
+          asset_name: betydb-${{ steps.release_info.outputs.version }}.tgz
           asset_content_type: application/zip
