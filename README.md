@@ -57,9 +57,55 @@ helm upgrade betydb ncsa/betydb \
     --set postgresql.postgresqlPassword="${POSTGRESQL_PASSWORD}"
 ```
 
-## Configuration
+## Parameters
+The following table lists the configurable parameters of the Bety chart and their default values per section/component:
 
-A YAML file that specifies the values for the necessary parameters can be provided while installing the chart. For example,
+### Common parameters
+
+| Parameter                 | Description                                                              | Default                                                 |
+|---------------------------|--------------------------------------------------------------------------|---------------------------------------------------------|
+| `nameOverride`            | String to partially override bety.fullname                               | `nil`                                                   |
+| `fullnameOverride`        | String to fully override bety.fullname                                   | `nil`                                                   |
+
+### Bety parameters
+
+| Parameter                 | Description                                                                              | Default                                                 |
+|---------------------------|------------------------------------------------------------------------------------------|---------------------------------------------------------|
+| `image.registry`                     | Bety image registry                                                           | `docker.io`                                             |
+| `image.repository`                   | Bety image name                                                               | `pecan/bety`                                            |
+| `image.tag`                          | Bety image tag                                                                | `null`                                                  |
+| `image.pullPolicy`                   | Bety image pull policy                                                        | `IfNotPresent`                                          |
+| `image.pullSecrets`                  | Specify docker-registry secret names as an array                              | `[]` (does not add image pull secrets to deployed pods) |
+| `replicaCount`                       | Number of Bety Pods to run                                                    | `1`                                                     |
+| `nodeSelector`                       | Node labels for pod assignment                                                | `{}` (evaluated as a template)                          |
+| `tolerations`                        | Tolerations for pod assignment                                                | `[]` (evaluated as a template)                          |
+| `affinity`                           | Affinity for pod assignment                                                   | `{}` (evaluated as a template)                          |
+| `service.type`                       | Kubernetes Service type                                                       | `ClusterIP`                                             |
+| `service.port`                       | Service HTTP port                                                             | `8000`                                                    |
+| `betyUser`                           | User value for bety.user                                                      | `bety`                                                  |
+| `betyPassword`                       | Password value for bety.password                                              | `bety`                                                  |
+| `betyDatabase`                       | Name of the database for bety.database                                        | `bety`                                                  |
+
+### Ingress parameters
+
+| Parameter                         | Description                                              | Default                        |
+|-----------------------------------|----------------------------------------------------------|--------------------------------|
+| `ingress.enabled`                 | Enable ingress controller resource                       | `false`                        |
+| `ingress.host`                    | Default host for the ingress resource                    | `[]` (evaluated as a template) |
+| `ingress.tls`                     | TLS configuration for the hostnames to be covered        | `false`                        |
+| `ingress.annotations`             | Ingress annotations                                      | `[]` (evaluated as a template) |
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
+```
+helm install mt-release ncsa/betydb \
+    --set betyPassword="xxxx" \
+    --set secretKey="xxxx" \
+    --set postgresql.postgresqlPassword="xxxx"
+```
+
+The above command sets the bety password, secret, postgresql password to `xxxx`,`xxxx`, and `xxxx` respectively.
+
+Alternatively, a YAML file that specifies the values for the necessary parameters can be provided while installing the chart. For example,
 
 ```
 helm install --name my-release -f values.yaml .
