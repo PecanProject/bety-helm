@@ -23,6 +23,8 @@ appVersion: "5.4.1"
 maintainers:
   - name: Rob Kooper
     email: kooper@illinois.edu
+  - name: Aju Tamang
+    email: aju.775401@ac.tu.edu.np
 
 # location of source code
 sources:
