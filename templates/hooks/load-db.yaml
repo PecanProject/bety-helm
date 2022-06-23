@@ -53,7 +53,6 @@ spec:
             - 0
             - -w
             - {{ .Values.dburl | quote }}
-            ./script/load.bety.sh -a "postgres" -d "bety" -p "-h postgres -p 5432" -o bety -c ${INITIALIZE_FLAGS} -m ${LOCAL_SERVER} -r 0 ${INITIALIZE_URL}
           {{- else }}
           image: "pecan/db:{{ .Values.dbtag }}"
           imagePullPolicy: Always

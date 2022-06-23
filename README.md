@@ -124,6 +124,11 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## ChangeLog
 
+### 0.5.1
+- update README to describe values
+- fix left over when initializing from URL
+- fix binami url change
+
 ### 0.5.0
 - initial release of the BETY helm chart.
 - build on bety 5.4.1
