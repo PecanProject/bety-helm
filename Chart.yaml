@@ -12,7 +12,7 @@ description: >
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.5.2
+version: 0.5.3
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -43,5 +43,4 @@ annotations:
     - name: Helm Chart
       url: https://github.com/pecanproject/bety-helm
   artifacthub.io/changes: |
-    - use new check image to use PG environment variables
-    - add-user and load-db are now jobs, not hooks (prevent timeout issues)
+    - need to check for table before start bety application

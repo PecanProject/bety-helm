@@ -42,8 +42,10 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             {{- include "betydb.postgresqlEnv" . | nindent 12 }}
-            - name: PG_TABLE
+            - name: PGDATABASE
               value: {{ .Values.betyDatabase | quote }}
+            - name: PG_TABLE
+              value: "sessions"
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"

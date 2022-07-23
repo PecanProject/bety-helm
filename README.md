@@ -124,6 +124,9 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## ChangeLog
 
+### 0.5.3
+- need to check for table before start bety application
+
 ### 0.5.2
 - use new check image to use PG environment variables
 - add-user and load-db are now jobs, not hooks (prevent timeout issues)
