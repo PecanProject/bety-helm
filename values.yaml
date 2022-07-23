@@ -1,7 +1,7 @@
 image:
   repository: pecan/bety
   tag: null
-  checks: "ncsa/checks:1.0.0"
+  checks: "ncsa/checks:1.0.1"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []

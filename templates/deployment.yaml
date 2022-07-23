@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "betydb.fullname" . }}
   labels:
-    {{ include "betydb.labels" . | nindent 4 }}
+    {{- include "betydb.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -41,8 +41,9 @@ spec:
           image: "{{ $.Values.image.checks }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            {{ include "betydb.postgresqlEnv" . | nindent 12 }}
-            {{ include "betydb.betydbEnv" . | nindent 12 }}
+            {{- include "betydb.postgresqlEnv" . | nindent 12 }}
+            - name: PG_TABLE
+              value: {{ .Values.betyDatabase | quote }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -63,8 +64,8 @@ spec:
               value: {{ .Values.ingress.path | default "" | trimSuffix "/" | quote }}
             - name: RAILS_LOG_TO_STDOUT
               value: "true"
-            {{ include "betydb.postgresqlEnv" . | nindent 12 }}
-            {{ include "betydb.betydbEnv" . | nindent 12 }}
+            {{- include "betydb.postgresqlEnv" . | nindent 12 }}
+            {{- include "betydb.betydbEnv" . | nindent 12 }}
           {{- if .Values.customization }}
           volumeMounts:
           {{- if .Values.customization.application }}

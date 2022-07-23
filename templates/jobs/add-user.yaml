@@ -1,5 +1,5 @@
 {{- if .Values.users }}
-{{- $imagetag := printf "%s:%s" .Values.image.repository .Values.image.tag }}
+{{- $imagetag := printf "%s:%s" .Values.image.repository (.Values.image.tag | default .Chart.AppVersion) }}
 {{- $pgenv := include "betydb.postgresqlEnv" . }}
 {{- $betyenv := include "betydb.betydbEnv" . }}
 {{- $pullPolicy := .Values.image.pullPolicy }}
@@ -8,19 +8,13 @@ kind: Job
 metadata:
   name: {{ include "betydb.fullname" . }}-add-user
   labels:
-    {{ include "betydb.labels" . | nindent 4 }}
-  annotations:
-    # This is what defines this resource as a hook. Without this line, the
-    # job is considered part of the release.
-    "helm.sh/hook": "post-install"
-    "helm.sh/hook-delete-policy": "hook-succeeded,before-hook-creation"
-    "helm.sh/hook-weight": "10"
+    {{- include "betydb.labels" . | nindent 4 }}
 spec:
   template:
     metadata:
       name: {{ include "betydb.name" . }}-add-user
       labels:
-        {{ include "betydb.labels" . | nindent 8 }}
+        {{- include "betydb.labels" . | nindent 8 }}
     spec:
       {{- with .Values.hooks.affinity }}
       affinity:
@@ -36,8 +30,9 @@ spec:
           image: "{{ $.Values.image.checks }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            {{ include "betydb.postgresqlEnv" . | nindent 12 }}
-            {{ include "betydb.betydbEnv" . | nindent 12 }}
+            {{- include "betydb.postgresqlEnv" . | nindent 12 }}
+            - name: PG_TABLE
+              value: {{ .Values.betyDatabase | quote }}
       containers:
         {{- range $index, $element := .Values.users }}
         - name: bety-add-user-{{ $index }}
@@ -52,7 +47,7 @@ spec:
             - {{ .data | quote }}
             - {{ .page | quote }}
           env:
-            {{ $pgenv | nindent 12 }}
-            {{ $betyenv | nindent 12 }}
+            {{- $pgenv | nindent 12 }}
+            {{- $betyenv | nindent 12 }}
         {{- end }}
 {{- end }}

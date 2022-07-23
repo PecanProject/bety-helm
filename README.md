@@ -124,6 +124,10 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## ChangeLog
 
+### 0.5.2
+- use new check image to use PG environment variables
+- add-user and load-db are now jobs, not hooks (prevent timeout issues)
+
 ### 0.5.1
 - update README to describe values
 - fix left over when initializing from URL
