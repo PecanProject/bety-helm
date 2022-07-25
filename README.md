@@ -124,6 +124,9 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## ChangeLog
 
+### 0.5.4
+- back to hooks since job completion requires RBAC role
+
 ### 0.5.3
 - need to check for table before start bety application
 
