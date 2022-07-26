@@ -1,7 +1,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: {{ include "betydb.fullname" . }}
+  name: {{ include "betydb.fullname" . }}-hooks
   labels:
     {{- include "betydb.labels" . | nindent 4 }}
 rules:
