@@ -6,7 +6,7 @@ metadata:
     {{- include "betydb.labels" . | nindent 4 }}
 rules:
 - apiGroups: [""]
-  resources: ["pods", "endpoints", "Services"]
+  resources: ["pods"]
   verbs:
   - list
   - watch
