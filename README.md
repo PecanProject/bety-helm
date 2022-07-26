@@ -11,6 +11,7 @@ Bety is a Web-interface to the Biofuel Ecophysiological Traits and Yields Databa
 
 ```
 helm repo add ncsa https://opensource.ncsa.illinois.edu/charts/
+helm dependency build
 ```
 
 To install the chart with the release name my-release:

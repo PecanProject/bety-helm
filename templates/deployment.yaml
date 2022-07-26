@@ -36,6 +36,8 @@ spec:
             name: {{ include "betydb.fullname" . }}-logos
       {{- end }}
       {{- end }}
+      serviceAccountName: {{ include "betydb.fullname" . }}
+      automountServiceAccountToken: false
       initContainers:
         - name: check-postgresql
           image: "{{ $.Values.image.checks }}"
