@@ -186,6 +186,6 @@ hooks:
 ## Use existing bety password as secret
 ## Create secret pecan-betydb-old with key betyPassword
 auth:
-  existingSecret:
+  existingSecret: ""
   secretKeys:
     betydbPasswordKey: ""
