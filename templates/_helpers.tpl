@@ -67,6 +67,67 @@ postgresql Port
 {{- end -}}
 
 {{/*
+Get the betydb secret.
+*/}}
+{{- define "betydb.secretName" -}}
+{{- if .Values.auth.existingSecret -}}
+    {{- printf "%s" (tpl .Values.auth.existingSecret $) -}}
+{{- else -}}
+    {{- printf "%s" (include "betydb.fullname" .) -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Get the betyPassword key.
+*/}}
+{{- define "betyPassword" -}}
+{{- if .Values.auth.existingSecret }}
+    {{- if .Values.auth.secretKeys.betyPassword }}
+        {{- printf "%s" (tpl .Values.auth.secretKeys.betyPassword $) -}}
+    {{- else -}}
+        {{ .Values.betyPassword | b64enc | quote }}
+    {{- end -}}
+{{- else -}}
+    {{ .Values.betyPassword | b64enc | quote }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Get the betydb password secret name.
+*/}}
+{{- define "betydb.secretName" -}}
+{{- if .Values.auth.existingSecret -}}
+    {{- printf "%s" (tpl .Values.auth.existingSecret $) -}}
+{{- else -}}
+    {{- printf "%s" (include "betydb.fullname" .) -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Get the betydb Password key.
+*/}}
+{{- define "betydb.betydbPasswordKey" -}}
+{{- if .Values.auth.existingSecret }}
+    {{- if .Values.auth.secretKeys.betydbPasswordKey }}
+        {{- printf "%s" (tpl .Values.auth.secretKeys.betydbPasswordKey $) -}}
+    {{- else -}}
+        {{- "betyPassword" }}
+    {{- end -}}
+{{- else -}}
+    {{- "betyPassword" }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return true if a betydb secret object should be created
+*/}}
+{{- define "betydb.createSecret" -}}
+{{- if not (.Values.auth.existingSecret) -}}
+    {{- true -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Environment variables for PostgreSQL
 */}}
 {{- define "betydb.postgresqlEnv" -}}
@@ -94,11 +155,6 @@ Environment variables for BetyDB
 {{- define "betydb.betydbEnv" -}}
 - name: BETYUSER
   value: {{ .Values.betyUser | quote }}
-- name: BETYPASSWORD
-  valueFrom:
-    secretKeyRef:
-      name: {{ include "betydb.fullname" . }}
-      key: betyPassword
 - name: BETYDATABASE
   value: {{ .Values.betyDatabase | quote }}
 - name: LOCAL_SERVER
