@@ -189,3 +189,4 @@ auth:
   existingSecret: ""
   secretKeys:
     betydbPasswordKey: ""
+    betydbEncryptSecretKey: ""

@@ -93,28 +93,17 @@ Get the betyPassword key.
 {{- end -}}
 
 {{/*
-Get the betydb password secret name.
+Get the betydb encryption secret key.
 */}}
-{{- define "betydb.secretName" -}}
-{{- if .Values.auth.existingSecret -}}
-    {{- printf "%s" (tpl .Values.auth.existingSecret $) -}}
-{{- else -}}
-    {{- printf "%s" (include "betydb.fullname" .) -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Get the betydb Password key.
-*/}}
-{{- define "betydb.betydbPasswordKey" -}}
+{{- define "betydb.betydbEncryptionSecretKey" -}}
 {{- if .Values.auth.existingSecret }}
-    {{- if .Values.auth.secretKeys.betydbPasswordKey }}
-        {{- printf "%s" (tpl .Values.auth.secretKeys.betydbPasswordKey $) -}}
+    {{- if .Values.auth.secretKeys.betydbEncryptionKey }}
+        {{- printf "%s" (tpl .Values.auth.secretKeys.betydbEncryptionKey $) -}}
     {{- else -}}
-        {{- "betyPassword" }}
+        {{- "secretKey" }}
     {{- end -}}
 {{- else -}}
-    {{- "betyPassword" }}
+    {{- "secretKey" }}
 {{- end -}}
 {{- end -}}
 
