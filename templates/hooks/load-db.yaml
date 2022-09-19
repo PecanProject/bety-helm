@@ -57,6 +57,11 @@ spec:
           imagePullPolicy: Always
           {{- end }}
           env:
+            - name: BETYPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "betydb.secretName" . }}
+                  key: {{ include "betydb.betydbPasswordKey" . }}
             {{- include "betydb.postgresqlEnv" . | nindent 12 }}
             {{- include "betydb.betydbEnv" . | nindent 12 }}
 {{- end }}

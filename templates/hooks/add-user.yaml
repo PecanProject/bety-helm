@@ -64,6 +64,11 @@ spec:
             - {{ .data | quote }}
             - {{ .page | quote }}
           env:
+            - name: BETYPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "betydb.secretName" . }}
+                  key: {{ include "betydb.betydbPasswordKey" . }}
             {{- $pgenv | nindent 12 }}
             {{- $betyenv | nindent 12 }}
         {{- end }}
