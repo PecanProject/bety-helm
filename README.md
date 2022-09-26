@@ -124,6 +124,9 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## ChangeLog
 
+### 0.5.5
+- Removing hooks to run helm chart quicker
+
 ### 0.5.4
 - back to hooks since job completion requires RBAC role
 

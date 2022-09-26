@@ -12,12 +12,12 @@ description: >
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.5.4
+version: 0.5.5
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
-appVersion: "5.4.1"
+appVersion: "5.4.2"
 
 # List of people that maintain this helm chart.
 maintainers:
@@ -25,6 +25,8 @@ maintainers:
     email: kooper@illinois.edu
   - name: Aju Tamang
     email: aju.775401@ac.tu.edu.np
+  - name: Sagar Utekar
+    email: sagarutekar2366@gmail.com
 
 # location of source code
 sources:
@@ -44,3 +46,4 @@ annotations:
       url: https://github.com/pecanproject/bety-helm
   artifacthub.io/changes: |
     - back to hooks since job completion requires RBAC role
+    - Removing hook backs for helm chart to run faster
