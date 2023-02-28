@@ -42,10 +42,6 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             {{- include "betydb.postgresqlEnv" . | nindent 12 }}
-            - name: PGDATABASE
-              value: {{ .Values.betyDatabase | quote }}
-            - name: PG_TABLE
-              value: "sessions"
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -99,6 +95,9 @@ spec:
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.serviceAccount.enabled }}
+      serviceAccountName: {{ include "serviceAccount.fullname" . | quote }}
       {{- end }}
     {{- with .Values.affinity }}
       affinity:
