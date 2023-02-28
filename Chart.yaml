@@ -36,7 +36,7 @@ dependencies:
 - name: postgresql
   version: ~8.9
   repository:  https://raw.githubusercontent.com/bitnami/charts/pre-2022/bitnami
-  condition: postgres.enabled
+  condition: postgresql.enabled
 
 annotations:
   artifacthub.io/links: |
