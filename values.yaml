@@ -39,6 +39,11 @@ betyDatabase: bety
 ## changed users will not be able to login with their existing passwords.
 secretKey: thisisnotasecret
 
+## Set to true if you will be managing the `betydb` secret with external secrets. 
+## The `betydb` secret includes `betyPassword`, `postgresqlPassword`, 
+## and `secretKey`.
+externalSecret: false
+
 ## dbtag is the tag of the database to load. Normally will use latest to
 ## make sure latest tag is loaded, this might not work with an older database.
 ## set this to "" to not load the database
@@ -107,6 +112,9 @@ postgresql:
   ## not saved in the database.
   postgresqlPassword: supersecret
 
+  ## postgresqlDatabase postgresql database to connect to load the database
+  postgresqlDatabase: postgres
+
   # need more space
   persistence:
     size: 20Gi
@@ -168,6 +176,21 @@ resources: {}
 ## Node selector
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 nodeSelector: {}
+
+serviceAccount:
+
+  # Specifies whether a service account should be added to the deployment
+  enabled: false
+
+  # Specifies whether a service account should be created
+  create: false
+
+  # Annotations to add to the service account
+  annotations: {}
+
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
 
 ## Tolerations
 ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/

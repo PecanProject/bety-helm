@@ -25,6 +25,23 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 
 {{/*
+Create a default service account name.
+If release name contains chart name it will be used as a full name.
+*/}}
+{{- define "serviceAccount.fullname" -}}
+{{- if .Values.serviceAccount.name -}}
+{{- .Values.serviceAccount.name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create chart name and version as used by the chart label.
 */}}
 {{- define "betydb.chart" -}}
@@ -74,6 +91,8 @@ Environment variables for PostgreSQL
   value: {{ include "betydb.postgresqlHost" . | quote }}
 - name: PGPORT
   value: {{ include "betydb.postgresqlPort" . | quote }}
+- name: PGDATABASE
+  value: {{ .Values.postgresql.postgresqlDatabase | default "postgres" | quote }}
 - name: PGUSER
   value: {{ .Values.postgresql.postgresqlUsername | default "postgres" | quote }}
 - name: PGPASSWORD
