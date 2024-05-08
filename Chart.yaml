@@ -34,8 +34,8 @@ sources:
 # are enabled.
 dependencies:
 - name: postgresql
-  version: ~8.9
-  repository:  https://raw.githubusercontent.com/bitnami/charts/pre-2022/bitnami
+  version: ~11
+  repository: oci://registry-1.docker.io/bitnamicharts
   condition: postgres.enabled
 
 annotations:
@@ -43,4 +43,4 @@ annotations:
     - name: Helm Chart
       url: https://github.com/pecanproject/bety-helm
   artifacthub.io/changes: |
-    - back to hooks since job completion requires RBAC role
+    - use new repository for postgresql chart

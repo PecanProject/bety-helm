@@ -75,13 +75,13 @@ Environment variables for PostgreSQL
 - name: PGPORT
   value: {{ include "betydb.postgresqlPort" . | quote }}
 - name: PGUSER
-  value: {{ .Values.postgresql.postgresqlUsername | default "postgres" | quote }}
+  value: {{ .Values.postgresql.auth.username | default "postgres" | quote }}
 - name: PGPASSWORD
   valueFrom:
     secretKeyRef:
 {{- if .Values.postgresql.enabled }}
       name: {{ .Release.Name }}-postgresql
-      key: postgresql-password
+      key: postgres-password
 {{- else }}
       name: {{ include "betydb.fullname" . }}
       key: postgresqlPassword

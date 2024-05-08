@@ -97,19 +97,21 @@ postgresql:
   ## postgresqlPort port to connect to postgresql
   # postgresqlPort: 5432
 
-  ## postgresqlUsername is the initial user added to the system. This is freqently the
-  ## postgres user. This user will have superuser abilities.
-  # postgresqlUsername: postgres
+  auth:
+    ## enablePostgresUser adds the postgres user This user will have superuser abilities.
+    # enablePostgresUser: true
 
-  ## postgresqlPassword the password for postgresqlUsername, if using auto generated
-  ## password make sure to save the password as described in the notes. When upgrading
-  ## you will need to provide this secret otherwise a new secret will be generated but
-  ## not saved in the database.
-  postgresqlPassword: supersecret
+    ## postgresPassword the password for postgres, if using auto generated
+    ## password make sure to save the password as described in the notes. When upgrading
+    ## you will need to provide this secret otherwise a new secret will be generated but
+    ## not saved in the database.
+    postgresPassword: supersecret
 
-  # need more space
-  persistence:
-    size: 20Gi
+  # we will only configure the primary database
+  primary:
+    # need more space
+    persistence:
+      size: 20Gi
 
 # -------------------------------------------------------------------------------
 
