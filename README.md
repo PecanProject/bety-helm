@@ -95,12 +95,20 @@ The following table lists the configurable parameters of the Bety chart and thei
 | `ingress.tls`                     | TLS configuration for the hostnames to be covered        | `false`                        |
 | `ingress.annotations`             | Ingress annotations                                      | `[]` (evaluated as a template) |
 
+### PostgreSQL parameters
+
+| Parameter                           | Description                                                  | Default       |
+| ----------------------------------- | ------------------------------------------------------------ | ------------- |
+| `postgresq.auth.enablePostgresUser` | Create the postgres user, this is the `root` account for postgresql. | `true`        |
+| `postgresq.auth.postgresPassword`   | Password for `postgres` user                                 | `supersecret` |
+
+
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 ```
 helm install mt-release ncsa/betydb \
     --set betyPassword="xxxx" \
     --set secretKey="xxxx" \
-    --set postgresql.postgresqlPassword="xxxx"
+    --set postgresql.auth.postgresqlPassword="xxxx"
 ```
 
 The above command sets the bety password, secret, postgresql password to `xxxx`,`xxxx`, and `xxxx` respectively.
@@ -121,24 +129,3 @@ helm delete my-release
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
-
-## ChangeLog
-
-### 0.5.4
-- back to hooks since job completion requires RBAC role
-
-### 0.5.3
-- need to check for table before start bety application
-
-### 0.5.2
-- use new check image to use PG environment variables
-- add-user and load-db are now jobs, not hooks (prevent timeout issues)
-
-### 0.5.1
-- update README to describe values
-- fix left over when initializing from URL
-- fix binami url change
-
-### 0.5.0
-- initial release of the BETY helm chart.
-- build on bety 5.4.1
