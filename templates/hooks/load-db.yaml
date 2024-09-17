@@ -33,6 +33,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             {{- include "betydb.postgresqlEnv" . | nindent 12 }}
+      serviceAccountName: {{ include "betydb.fullname" . }}-hooks
+      automountServiceAccountToken: false
       containers:
         - name: bety-init
           {{- if .Values.dburl }}
