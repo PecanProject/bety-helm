@@ -60,12 +60,17 @@ spec:
             - name: SECRET_KEY_BASE
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "betydb.fullname" . }}
-                  key: secretKey
+                  name: {{ include "betydb.secretName" . }}
+                  key: {{ include "betydb.betydbEncryptionSecretKey" . }}
             - name: RAILS_RELATIVE_URL_ROOT
               value: {{ .Values.ingress.path | default "" | trimSuffix "/" | quote }}
             - name: RAILS_LOG_TO_STDOUT
               value: "true"
+            - name: BETYPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "betydb.secretName" . }}
+                  key: {{ include "betydb.betydbPasswordKey" . }}
             {{- include "betydb.postgresqlEnv" . | nindent 12 }}
             {{- include "betydb.betydbEnv" . | nindent 12 }}
           {{- if .Values.customization }}

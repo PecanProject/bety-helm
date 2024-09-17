@@ -183,3 +183,12 @@ affinity: {}
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
 hooks:
   affinity: {}
+
+
+## Use existing bety password as secret
+## Create secret pecan-betydb-old with key betyPassword
+auth:
+  existingSecret: ""
+  secretKeys:
+    betydbPasswordKey: ""
+    betydbEncryptSecretKey: ""
