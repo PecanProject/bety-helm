@@ -31,7 +31,7 @@ betyUser: bety
 ## and PEcAn.
 betyPassword: bety
 
-## betyDatabase the database that will be created and that BETYDB adn PEcAn
+## betyDatabase the database that will be created and that BETYDB and PEcAn
 ## will connect to and write data.
 betyDatabase: bety
 
@@ -83,8 +83,9 @@ customization: {}
 
 ## All data for BETYDB will be stored in PostgreSQL
 postgresql:
-  ## enabled should the postgresql chart be installed as well. If not make
-  ## sure that the other values are provied to get access to the database.
+  ## By default, enabled is set to true to install postgresql helm chart. To use 
+  ## externally hosted postgresql set enabled to false and make sure to provide other values to
+  ## access the database.
   enabled: true
 
   ## it takes some time to start postgresql, wait 5 min before start liveness.
