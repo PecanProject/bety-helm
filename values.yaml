@@ -87,6 +87,12 @@ postgresql:
   ## sure that the other values are provied to get access to the database.
   enabled: true
 
+  ## use bitnami legacy image
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/postgresql
+    tag: "11.8.0"
+
   ## it takes some time to start postgresql, wait 5 min before start liveness.
   livenessProbe:
     initialDelaySeconds: 300

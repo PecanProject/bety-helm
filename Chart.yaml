@@ -12,7 +12,7 @@ description: >
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.5.4
+version: 0.5.5
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -35,7 +35,7 @@ sources:
 dependencies:
 - name: postgresql
   version: ~11
-  repository: oci://registry-1.docker.io/bitnamicharts
+  repository: https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami
   condition: postgres.enabled
 
 annotations:
@@ -43,4 +43,4 @@ annotations:
     - name: Helm Chart
       url: https://github.com/pecanproject/bety-helm
   artifacthub.io/changes: |
-    - use new repository for postgresql chart
+    - use bitnami legacy postgresql image
