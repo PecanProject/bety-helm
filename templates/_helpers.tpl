@@ -79,13 +79,8 @@ Environment variables for PostgreSQL
 - name: PGPASSWORD
   valueFrom:
     secretKeyRef:
-{{- if .Values.postgresql.enabled }}
-      name: {{ .Release.Name }}-postgresql
-      key: postgres-password
-{{- else }}
       name: {{ include "betydb.fullname" . }}
       key: postgresqlPassword
-{{- end }}
 {{- end }}
 
 {{/*

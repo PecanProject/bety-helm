@@ -6,13 +6,13 @@ name: betydb
 icon: https://isda.ncsa.illinois.edu/~kooper/charts/images/betydb.png
 home: https://www.betydb.org
 description: >
-  Web-interface to the Biofuel Ecophysiological Traits and Yields Database 
+  Web-interface to the Biofuel Ecophysiological Traits and Yields Database
   (used by PEcAn and TERRA REF)
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.5.5
+version: 0.6.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -33,14 +33,15 @@ sources:
 # Dependencies for chart. Some of the dependencies are only installed if they
 # are enabled.
 dependencies:
-- name: postgresql
-  version: ~11
-  repository: https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami
-  condition: postgres.enabled
+  - name: postgresql
+    version: ~11
+    repository: https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami
+    condition: postgres.enabled
 
 annotations:
   artifacthub.io/links: |
     - name: Helm Chart
       url: https://github.com/pecanproject/bety-helm
   artifacthub.io/changes: |
-    - use bitnami legacy postgresql image
+    - bitnami legacy postgresql image
+    - could not find passsword for postgresql
