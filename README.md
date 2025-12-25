@@ -86,6 +86,14 @@ The following table lists the configurable parameters of the Bety chart and thei
 | `betyPassword`                       | Password value for bety.password                                              | `bety`                                                  |
 | `betyDatabase`                       | Name of the database for bety.database                                        | `bety`                                                  |
 
+### OpenShift/Kubernetes parameters
+
+| Parameter                         | Description                                              | Default                        |
+|-----------------------------------|----------------------------------------------------------|--------------------------------|
+| `serviceAccount.enabled`          | Enable creation and use of a deployment service account  | false                          |
+| `serviceAccount.name`             | Add a serviceAccountName to the deployment               | ``                             |
+| `serviceAccount.annotations`      | Add annotations to the serviceAccount                    | {}                             |
+
 ### Ingress parameters
 
 | Parameter                         | Description                                              | Default                        |
