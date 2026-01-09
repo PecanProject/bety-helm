@@ -32,6 +32,8 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      serviceAccountName: {{ include "betydb.fullname" . }}-hooks
+      automountServiceAccountToken: false
       initContainers:
       #{{- if or .Values.dburl .Values.dbtag }}
       #   - name: check-job
